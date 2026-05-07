@@ -110,21 +110,31 @@
     </div>
 
     <script>
+        // PANELİ AÇMA/KAPATMA
         function toggleAdmin() {
             var panel = document.getElementById('adminPanel');
             panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
         }
 
+        // YETKİ KONTROLÜ VE YÖNLENDİRME
         function checkAdmin() {
             var u = document.getElementById('user').value;
             var p = document.getElementById('pass').value;
+            
+            // 🛡️ LORD'UN ÖZEL BİLGİLERİ
             if (u === "tmcares" && p === "ares1235") {
-                alert("🔱 HOŞGELDİN LORDUM ARES 🔱\nOtorite Onaylandı. Mahzen Kapıları Açılıyor...");
-                window.location.href = "https://github.com";
+                alert("🔱 Otorite Onaylandı. Mahzen Kapıları Açılıyor...");
+                // 🚀 GİZLİ ODAYA (admin.html) FİRLAT!
+                window.location.href = "admin.html";
             } else {
                 alert("❌ HATA: Yetkisiz Giriş Denemesi Kaydedildi!");
             }
         }
+
+        // KLAVYEDEN 'A' TUŞU TETİĞİ
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'a' || e.key === 'A') { toggleAdmin(); }
+        });
     </script>
 
 </body>
