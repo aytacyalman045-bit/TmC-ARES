@@ -3,77 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TmC ARES | Siber Karargah</title>
+    <title>TmC ARES | SARSILMAZ TAHTIM</title>
     <style>
-        /* 🌑 TmC ARES KARANLIK TEMA */
-        body { background-color: #050505; color: #00ff41; font-family: 'Courier New', monospace; margin: 0; }
-        header { background: #0a0a0a; padding: 70px 20px; text-align: center; border-bottom: 2px solid #00ff41; box-shadow: 0 0 20px #00ff41; }
-        h1 { color: #00ff41; margin: 0; font-size: 2.5em; letter-spacing: 5px; text-shadow: 0 0 10px #00ff41; }
-        .container { max-width: 900px; margin: 40px auto; padding: 20px; }
-        .post { background: #0d0d0d; padding: 30px; border-radius: 5px; margin-bottom: 30px; border: 1px solid #1a1a1a; transition: 0.4s; }
-        .post:hover { border-color: #00ff41; box-shadow: 0 0 15px #00ff41; }
-        h2 { color: #fff; margin-top: 0; border-bottom: 1px solid #00ff41; display: inline-block; }
-        p { color: #aaa; line-height: 1.8; }
-
-        /* 🔐 GİZLİ TmC ADMİN PANELİ */
-        #adminPanel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #000; padding: 50px; border: 3px solid #00ff41; box-shadow: 0 0 100px #000; z-index: 9999; text-align: center; }
-        input { width: 100%; padding: 15px; margin: 15px 0; background: #050505; border: 1px solid #00ff41; color: #00ff41; }
-        button { background: #00ff41; color: #000; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        .secret-gate { color: #050505; cursor: default; }
+        body { background-color: #000; color: #00ff41; font-family: 'Courier New', monospace; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; text-align: center; }
+        .header-title { font-size: 1.5em; letter-spacing: 5px; color: #fff; margin-bottom: 20px; text-shadow: 0 0 10px #fff; }
+        .racon { font-size: 3.5em; font-weight: bold; letter-spacing: 12px; text-shadow: 0 0 20px #00ff41; text-transform: uppercase; animation: pulse 1.5s infinite alternate; }
+        @keyframes pulse { from { transform: scale(1); text-shadow: 0 0 10px #00ff41; } to { transform: scale(1.05); text-shadow: 0 0 40px #00ff41; } }
+        
+        /* 🔐 GİZLİ ADMİN PANELİ */
+        #adminPanel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #000; padding: 40px; border: 2px solid #00ff41; box-shadow: 0 0 50px #00ff41; z-index: 9999; }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid #00ff41; color: #00ff41; font-family: 'Courier New', monospace; box-sizing: border-box; }
+        button { width: 100%; background: #00ff41; color: #000; border: none; padding: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .admin-gate { position: fixed; bottom: 10px; color: #050505; cursor: default; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>🔱 TmC ARES 🔱</h1>
-    <p style="color: #00ff41; font-size: 0.9em;">[ SİBER GÜNCE V1.0 ]</p>
-</header>
+    <div class="header-title">🔱 TmC ARES SARSILMAZ TAHTIM 🔱</div>
+    <div class="racon">AZ LAF ÇOK İCRAAT</div>
 
-<div class="container">
-    <div class="post">
-        <h2>0x01: Kodun Sessizliği</h2>
-        <p>TmC ARES mahzenlerinde ilmek ilmek işlenen yeni nesil tüneller üzerine... Görünmezlik sarsılmaz birer silahtır ve biz bu silahı en keskin haliyle kullanıyoruz.</p>
+    <div id="adminPanel">
+        <h2 style="color: #00ff41; font-size: 1.2em;">LORD GİRİŞİ</h2>
+        <input type="text" id="user" placeholder="Kullanıcı Adı">
+        <input type="password" id="pass" placeholder="Mühür (Şifre)">
+        <button onclick="checkAdmin()">SİSTEME SIZ</button>
     </div>
-    <div class="post">
-        <h2>0x02: Veri Hakimiyeti</h2>
-        <p>Dijital haritada iz bırakmadan ilerlemenin yolları. Arkadaşın bu yazıyı okurken, siber evrenin sarsılmaz hiyerarşisi saniyeler içinde yeniden kuruluyor.</p>
-    </div>
-</div>
 
-<!-- 🔐 TmC ADMİN GİRİŞİ -->
-<div id="adminPanel">
-    <h2 style="color: #00ff41;">TmC ARES COMMANDER</h2>
-    <p style="font-size: 0.8em; color: #666;">YETKİ KODUNU MÜHÜRLE</p>
-    <input type="password" id="pass" placeholder="ARES_AUTH_KEY">
-    <br>
-    <button onclick="checkAdmin()">SİSTEMİ TETİKLE</button>
-</div>
+    <div class="admin-gate" onclick="toggleAdmin()">.</div>
 
-<footer style="text-align: center; padding: 50px; color: #111;">
-    TmC ARES © 2026 <span class="secret-gate" onclick="toggleAdmin()">.</span>
-</footer>
+    <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'a' || e.key === 'A') { toggleAdmin(); }
+        });
 
-<script>
-    // 🚀 GİZLİ GİRİŞ TETİĞİ (Klavyeden 'A' tuşu)
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'a' || e.key === 'A') { toggleAdmin(); }
-    });
-
-    function toggleAdmin() {
-        var panel = document.getElementById('adminPanel');
-        panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
-    }
-
-    function checkAdmin() {
-        var pass = document.getElementById('pass').value;
-        if (pass === "ARES2026") { // TmC ARES Özel Şifresi
-            alert("✅ Yetki Onaylandı! TmC Karargahına giriliyor...");
-            window.location.href = "https://github.com"; // Kendi mahzenine yönlendirir
-        } else {
-            alert("❌ HATA: Yetkisiz Erişim Denemesi Kaydedildi!");
+        function toggleAdmin() {
+            var panel = document.getElementById('adminPanel');
+            panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
         }
-    }
-</script>
+
+        function checkAdmin() {
+            var user = document.getElementById('user').value;
+            var pass = document.getElementById('pass').value;
+
+            if (user === "tmcares" && pass === "ares1235") {
+                alert("🔱 HOŞGELDİN LORDUM ARES 🔱\nOtorite Onaylandı. Mahzen Kapıları Açılıyor...");
+                window.location.href = "https://github.com";
+            } else {
+                alert("❌ HATA: Yetkisiz Giriş! Lordun kalesinden uzak dur piyon.");
+            }
+        }
+    </script>
 
 </body>
 </html>
