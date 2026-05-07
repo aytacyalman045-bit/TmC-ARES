@@ -5,51 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TmC ARES | SARSILMAZ TAHTIM</title>
     <style>
-        body { background-color: #000; color: #00ff41; font-family: 'Courier New', monospace; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; text-align: center; }
-        .header-title { font-size: 1.5em; letter-spacing: 5px; color: #fff; margin-bottom: 20px; text-shadow: 0 0 10px #fff; }
-        .racon { font-size: 3.5em; font-weight: bold; letter-spacing: 12px; text-shadow: 0 0 20px #00ff41; text-transform: uppercase; animation: pulse 1.5s infinite alternate; }
-        @keyframes pulse { from { transform: scale(1); text-shadow: 0 0 10px #00ff41; } to { transform: scale(1.05); text-shadow: 0 0 40px #00ff41; } }
-        
-        /* 🔐 GİZLİ ADMİN PANELİ */
-        #adminPanel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #000; padding: 40px; border: 2px solid #00ff41; box-shadow: 0 0 50px #00ff41; z-index: 9999; }
-        input { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid #00ff41; color: #00ff41; font-family: 'Courier New', monospace; box-sizing: border-box; }
-        button { width: 100%; background: #00ff41; color: #000; border: none; padding: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .admin-gate { position: fixed; bottom: 10px; color: #050505; cursor: default; }
+        body { 
+            background-color: #000; 
+            color: #00ff41; 
+            font-family: 'Courier New', monospace; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* 🔐 SAĞ ÜST ADMİN BUTONU */
+        .admin-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            background: transparent;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.8em;
+        }
+        .admin-btn:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 15px #00ff41;
+        }
+
+        .tmc-name {
+            font-size: 2.5em;
+            letter-spacing: 15px;
+            color: #00ff41;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px #00ff41;
+            font-weight: bold;
+        }
+
+        .throne-title {
+            font-size: 1.2em;
+            letter-spacing: 8px;
+            color: #fff;
+            margin-top: 30px;
+            margin-bottom: 80px;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        .racon { 
+            font-size: 4em; 
+            font-weight: 900; 
+            letter-spacing: 20px; 
+            text-shadow: 0 0 30px #00ff41;
+            text-transform: uppercase;
+            border-top: 2px solid #00ff41;
+            border-bottom: 2px solid #00ff41;
+            padding: 20px 0;
+            animation: heavy-glow 3s infinite alternate;
+        }
+
+        @keyframes heavy-glow {
+            from { text-shadow: 0 0 10px #00ff41; transform: scale(1); }
+            to { text-shadow: 0 0 50px #00ff41; transform: scale(1.02); }
+        }
+
+        /* 🔐 ADMİN PANELİ MODAL */
+        #adminPanel { 
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            background: #000; 
+            padding: 40px; 
+            border: 2px solid #00ff41; 
+            z-index: 9999; 
+            box-shadow: 0 0 100px #000; 
+        }
+        input { background: #000; color: #00ff41; border: 1px solid #00ff41; padding: 12px; margin: 10px 0; width: 250px; text-align: center; font-family: 'Courier New', monospace; }
+        button.login-btn { background: #00ff41; color: #000; border: none; padding: 12px 30px; font-weight: bold; cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
 
-    <div class="header-title">🔱 TmC ARES SARSILMAZ TAHTIM 🔱</div>
+    <button class="admin-btn" onclick="toggleAdmin()">ADMIN GİRİŞİ</button>
+
+    <div class="tmc-name">🔱 TmC ARES 🔱</div>
+    <div class="throne-title">SARSILMAZ TAHTIM</div>
+    
     <div class="racon">AZ LAF ÇOK İCRAAT</div>
 
     <div id="adminPanel">
-        <h2 style="color: #00ff41; font-size: 1.2em;">LORD GİRİŞİ</h2>
+        <h2 style="color: #00ff41; font-size: 1.2em; margin-bottom: 20px;">LORD KOMUTA MERKEZİ</h2>
         <input type="text" id="user" placeholder="Kullanıcı Adı">
-        <input type="password" id="pass" placeholder="Mühür (Şifre)">
-        <button onclick="checkAdmin()">SİSTEME SIZ</button>
+        <input type="password" id="pass" placeholder="Yetki Mührü">
+        <button class="login-btn" onclick="checkAdmin()">SİSTEME SIZ</button>
     </div>
 
-    <div class="admin-gate" onclick="toggleAdmin()">.</div>
-
     <script>
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'a' || e.key === 'A') { toggleAdmin(); }
-        });
-
         function toggleAdmin() {
             var panel = document.getElementById('adminPanel');
             panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
         }
 
         function checkAdmin() {
-            var user = document.getElementById('user').value;
-            var pass = document.getElementById('pass').value;
-
-            if (user === "tmcares" && pass === "ares1235") {
+            var u = document.getElementById('user').value;
+            var p = document.getElementById('pass').value;
+            if (u === "tmcares" && p === "ares1235") {
                 alert("🔱 HOŞGELDİN LORDUM ARES 🔱\nOtorite Onaylandı. Mahzen Kapıları Açılıyor...");
                 window.location.href = "https://github.com";
             } else {
-                alert("❌ HATA: Yetkisiz Giriş! Lordun kalesinden uzak dur piyon.");
+                alert("❌ HATA: Yetkisiz Giriş Denemesi Kaydedildi!");
             }
         }
     </script>
